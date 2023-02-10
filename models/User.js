@@ -11,7 +11,7 @@ class User extends Model {}
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      user_name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -23,6 +23,14 @@ class User extends Model {}
           isEmail: true,
         },
       },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      real_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -32,12 +40,12 @@ class User extends Model {}
       },
     },
     {
-      hooks: {
-        beforeCreate: async (newUserData) => {
-          newUserData.password = await bcrypt.hash(newUserData.password, 10);
-          return newUserData;
-        },
-      },
+      // hooks: {
+      //   beforeCreate: async (newUserData) => {
+      //     newUserData.password = await bcrypt.hash(newUserData.password, 10);
+      //     return newUserData;
+      //   },
+      // },
       sequelize,
       timestamps: false,
       freezeTableName: true,
