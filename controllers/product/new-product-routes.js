@@ -1,10 +1,10 @@
 const router = require('express').Router();
 // change it back to const { Product } = require('../../models') once we create teh index.js in model folder
 const { Product }= require('../../models');
-const js = require("../../public/js/newproduct")
+
 
 router.get('/', async (req, res) => {
-    res.render('newproduct')
+    res.render('newproduct',{})
 })
 router.post('/', async (req, res) => {
     // const {product_name, category, expire_date, description, img, user_id} = req.body

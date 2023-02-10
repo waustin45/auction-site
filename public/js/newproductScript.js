@@ -1,5 +1,5 @@
 const form = document.querySelector('.form')
-console.log("works")
+console.log("works this is from the frontend file")
 form.addEventListener("submit", createNewProduct)
 function createNewProduct (event) {
     event.preventDefault()
