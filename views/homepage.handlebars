@@ -1,0 +1,34 @@
+<main class="home-page-main">
+    <section class="interactive-menu border-2 h-[20rem] w-[10rem] ">
+        <button class="sort-by-asc bg-blue-300 p-1"><span>Sort by asc. price</span></button>
+        <button class="sort-by-desc bg-blue-300 p-1"><span>Sort by desc. price</span></button>
+        <button class="sort-by-bids bg-blue-300 p-1"><span>Sort by number of bids.</span></button>
+    </section>
+    <section class="products-output">
+        {{#each plainData as |data|}}
+        <div class="card-wrapper border-2 w-[15rem] flex flex-col gap-3">
+            <img src="#" alt="product-img">
+            <div class="product-name">
+                <span>{{data.product_name}}</span>
+            </div>
+            <div class="user-name">
+                <span>username</span>
+            </div>
+            <div class="bids">
+                <span>{{data.bids.[0].bid_amt}}</span>
+            </div>
+            <a class="bg-blue-300 p-1" href="/product/view/{{data.id}}">View Product</a>
+        </div>
+        
+        {{/each}}
+    </section>
+</main>
+
+<script>
+           const btn = document.querySelector('.sort-by-asc')
+           btn.addEventListener('click', () => {
+            console.log("works")
+            fetch('/asc').then(res => res.json()).then(data=> console.log(data))
+           })
+                   
+        </script>

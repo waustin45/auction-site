@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-
 router.post('/login', async (req, res) => {
   try {
     // Find the user who matches the posted e-mail address
