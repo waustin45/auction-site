@@ -5,7 +5,7 @@
     <p>selling by: {{product.user_id}}</p> <!--Should be username? -->
     <p>{{product.description}}</p>
     <p>Current bid: </p>
-    <form> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid"> <input type="submit" value="Submit"> </form>
+    <form> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid" value={{product.id}}> <input type="submit" value="Submit"> </form>
     <p> Bidding history:</p>
 
 
@@ -15,17 +15,22 @@
 </main>
 
 <script>
+const bidBtn = document.querySelector('#new-bid');
+
 //fetch call for placing a bid
     console.log(product.id);
 const placeBid = async (event) => {
     event.preventDefault();
     console.log(product.id);
-    const bidAmt = document.querySelector('#new-bid').value;
-    const response = await fetch(`/products/view/${product.id)}`, {
+    console.log(event);
+    {{!-- const bidAmt = document.querySelector('#new-bid').value;
+    const response = await fetch(`/products/view/${product.id}`, {
         method: 'POST',
-        body: JSON.stringify({ bidAmt, /*user id*/,  })
+        body: JSON.stringify({ bidAmt, 'userid', product.id})
 
-    }
+    }) --}}
 }
+
+bidBtn.addEventListener('submit', placeBid);
 
 </script>
