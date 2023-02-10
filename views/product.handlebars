@@ -1,11 +1,11 @@
 <main class="flex flex-row">
-    <img src="" alt="product image goes here">
+    <img src={{product.image}} alt="product image goes here">
     <div>
     <h1>{{product.product_name}}</h1>
-    <p>selling by: {{product.user_id}}</p>
+    <p>selling by: {{product.user_id}}</p> <!--Should be username? -->
     <p>{{product.description}}</p>
     <p>Current bid: </p>
-    <p>Place bid:</p>
+    <form> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid"> <input type="submit" value="Submit"> </form>
     <p> Bidding history:</p>
 
 
@@ -13,3 +13,19 @@
 
     </div>
 </main>
+
+<script>
+//fetch call for placing a bid
+    console.log(product.id);
+const placeBid = async (event) => {
+    event.preventDefault();
+    console.log(product.id);
+    const bidAmt = document.querySelector('#new-bid').value;
+    const response = await fetch(`/products/view/${product.id)}`, {
+        method: 'POST',
+        body: JSON.stringify({ bidAmt, /*user id*/,  })
+
+    }
+}
+
+</script>
