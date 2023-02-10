@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Product, Bid } = require('../../models');
 
 //GET all the info for one product
-//url/product/:id
+//url/product/view/:id
 router.get('/view/:id', async (req, res) => {
     // if (!req.session.loggedIn) {
     //     res.redirect('/login');
@@ -37,6 +37,7 @@ router.get('/view/:id', async (req, res) => {
 );
 
 // POST to place a bid
+//url/product/view/:id
 router.post('/view/:id', async (req, res) => {
     try {
         const newBid = await Bid.create({
