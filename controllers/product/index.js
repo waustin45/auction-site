@@ -6,6 +6,6 @@ const productRoutes = require('./product-routes');
 
 // loaclahost3001/product/newproduct
 router.use('/newproduct', newProduct);
-router.use('/viewproduct', productRoutes);
+// router.use('/viewproduct', productRoutes);
 
 module.exports = router;
