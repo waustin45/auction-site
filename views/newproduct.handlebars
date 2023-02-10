@@ -1,0 +1,34 @@
+<main class="creat-prod-main flex flex-col justify-center items-center w-full">
+    <h1 class="text-4xl mt-4">Create A Product</h1>
+    <form class="form mt-4 flex flex-col justify-center items-start w-[30%]">
+        <div class="product-name-field w-full flex justify-between items-center">
+            <span>Product Name:</span>
+            <input class="border-2" id="product-name-field" type="text" required placeholder="Type Name"/>
+        </div>
+        <div class="category-field w-full flex justify-between items-center">
+            <span>Category:</span>
+            <input class="border-2" id="category-input" type="text" required placeholder="Type Category"/>
+        </div>
+        <div class="expire-date-field w-full flex justify-between items-center">
+            <span>Expiration Date (YYYY-MM-DD):</span>
+            <input  class="border-2" id="expire-date-input" type="text" required placeholder="(YYYY-MM-DD)"/>
+        </div>
+        <div class="description-field w-full flex justify-between items-center">
+            <span>Description:</span>
+            <textarea class="border-2" rows="5" id="description-input" type="text" required placeholder="description"></textarea>
+        </div>
+        <div class="img-field w-full flex justify-between items-center">
+            <span>Image:</span>
+            <input class="border-2" rows="5" id="img-input" type="text" required placeholder="description"></input>
+        </div>
+        <div class="user-field w-full flex justify-between items-center">
+            <span>User:</span>
+            <input class="border-2" rows="5" id="user-input" type="number" required placeholder="description"></input>
+        </div>
+        <button class="border-2 bg-blue-200 p-1" type="submit" id="submit-btn">Submit</button>
+    </form>
+    
+</main>
+
+<script type="text/html" src="./js/newproduct.js"></script>
+
