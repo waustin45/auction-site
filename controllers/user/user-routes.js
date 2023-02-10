@@ -1,5 +1,30 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Product, Bid } = require('../../models');
+
+router.get('/', async (req, res) => {
+  res.render('login', {})
+})
+
+router.post('/createuser', async (req, res) => {
+  try {
+    // const {id, user_name, email, address, real_name, password } = req.body
+    
+    const newUser = await User.create({
+      // id: id,
+      user_name: req.body.user_name,
+      email: req.body.email,
+      address: req.body.address,
+      real_name: req.body.real_name,
+      password: req.body.password
+
+    })
+    console.log(newUser)
+    res.json(newUser)
+  }catch(err) {
+    res.status(500).json(err)
+  }
+})
+
 router.post('/login', async (req, res) => {
   try {
     // Find the user who matches the posted e-mail address
