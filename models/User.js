@@ -29,11 +29,9 @@ class User extends Model {
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       real_name: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
