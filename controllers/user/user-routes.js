@@ -6,13 +6,18 @@ router.get('/', async (req, res) => {
   res.render('login', {})
 })
 
+//POST to url/user/createuser
 router.post('/createuser', async (req, res) => {
   try {
     // const {id, user_name, email, address, real_name, password } = req.body
     
-    const newUser = await User.create(req.body
+    const newUser = await User.create(
+      {
+        user_name: req.body.user_name,
+        email: req.body.email,
+        password: req.body.password,
+      }
     //   {
-    //   // id: id,
     //   user_name: req.body.user_name,
     //   email: req.body.email,
     //   address: req.body.address,
@@ -20,9 +25,9 @@ router.post('/createuser', async (req, res) => {
     //   password: req.body.password
 
     // }
-    )
-    console.log(newUser)
-    res.json(newUser)
+    );
+    console.log(newUser);
+    res.json(newUser);
   }catch(err) {
     res.status(500).json(err)
   }

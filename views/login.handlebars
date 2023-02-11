@@ -24,20 +24,23 @@
 
     //Create user function
     createForm.addEventListener("submit", (e) => {
-        const username = document.querySelector('#username').value.trim()
-        const password = document.querySelector('#password').value.trim()
+        const email = document.querySelector('#email').value.trim()
+        const username = document.querySelector('#create-username').value.trim()
+        const password = document.querySelector('#create-password').value.trim()
         e.preventDefault()
         const creds = {
+            email: email,
             user_name: username,
             password: password
         }
-        console.log(creds)
-        fetch("/user/login", {
+        console.log(creds);
+        fetch("/user/createuser", {
         method: 'POST',
         body: JSON.stringify(creds),
         headers: { 'Content-Type': 'application/json' },
     }).then(res => {
         if (res.ok) {
+            console.log(res)
       document.location.replace('/');
     } else {
      console.log(response.statusText);
