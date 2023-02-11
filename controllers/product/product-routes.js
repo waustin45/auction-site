@@ -4,9 +4,9 @@ const { User, Product, Bid } = require('../../models');
 //GET all the info for one product
 //url/product/view/:id
 router.get('/view/:id', async (req, res) => {
-    // if (!req.session.loggedIn) {
-    //     res.redirect('/login');
-    // } else {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+    } else {
         try {
             
             const dbProductData = await Product.findByPk(req.params.id, {
@@ -26,14 +26,14 @@ router.get('/view/:id', async (req, res) => {
                 ],
             });
             const product = dbProductData.get({ plain: true });
-            res.render('product', { product, loggedIn: req.session.loggedIn })
+            res.render('product', { product, loggedIn: req.session.logged_In, session_user: req.session.user_id })
         }
         catch (err) {
             console.log(err);
             res.status(500).json(err); 
         }
     }
-// }
+}
 );
 
 // POST to place a bid

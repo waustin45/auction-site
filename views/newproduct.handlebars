@@ -22,13 +22,50 @@
             <input class="border-2" rows="5" id="img-input" type="text" required placeholder="description"></input>
         </div>
         <div class="user-field w-full flex justify-between items-center">
-            <span>User:</span>
-            <input class="border-2" rows="5" id="user-input" type="number" required placeholder="description"></input>
+            <span>User:<span class="session-user">{{session_user}}</span></span>
+            <span>UserID:<span class="session-user-id" value="{{id}}">{{id}}</span></span>
+            {{!-- <input class="border-2" rows="5" id="user-input" type="number" required placeholder="description"></input> --}}
         </div>
         <button class="border-2 bg-blue-200 p-1" type="submit" id="submit-btn">Submit</button>
     </form>
     
 </main>
 
-
+<script>
+    const form = document.querySelector('.form')
+console.log("works this is from the frontend file")
+form.addEventListener("submit", createNewProduct)
+function createNewProduct (event) {
+    event.preventDefault()
+    console.log("works")
+    const name = document.querySelector('#product-name-field').value
+    const expiry = document.querySelector('#expire-date-input').value
+    const category = document.querySelector('#category-input').value
+    const description = document.querySelector('#description-input').value
+    const img = document.querySelector('#img-input').value
+    const user = document.querySelector('.session-user-id').textContent
+    const newProd = {
+            product_name: name,
+            category: category,
+            expire_date: expiry,
+            description: description,
+            image: img,
+            user_id: parseInt(user)
+    }
+    
+    if (newProd) {
+         fetch('/product/newproduct', {
+        method: "POST",
+        body: JSON.stringify(newProd),
+        headers: {
+            'Content-Type': 'application/json',
+          },
+    })
+    console.log(newProd)
+    } else {
+        alert("Failed to create product")
+    }
+   
+}
+</script>
 
