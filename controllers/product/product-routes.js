@@ -4,8 +4,8 @@ const { User, Product, Bid } = require('../../models');
 //GET all the info for one product
 //url/product/view/:id
 router.get('/view/:id', async (req, res) => {
-    if (!req.session.loggedIn) {
-        res.redirect('/login');
+    if (!req.session.logged_in) {
+        res.redirect('/user');
     } else {
         try {
             
@@ -26,7 +26,7 @@ router.get('/view/:id', async (req, res) => {
                 ],
             });
             const product = dbProductData.get({ plain: true });
-            res.render('product', { product, loggedIn: req.session.logged_In, session_user: req.session.user_id })
+            res.render('product', { product, logged_in: req.session.logged_in, session_user: req.session.user_id })
         }
         catch (err) {
             console.log(err);

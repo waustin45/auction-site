@@ -5,7 +5,7 @@
     <p>selling by: <span id='userIdEl'>{{product.user_id}}</span></p> <!--Should be username? -->
     <p>{{product.description}}</p>
     <p>Current bid: </p>
-    <form id="bidForm"> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid" value={{product.id}}> <input type="submit" value="Submit"> </form>
+    <form id="bidForm"> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid"> <input type="submit" value="Submit"> </form>
     <p> Bidding history:</p>
 
 
@@ -18,14 +18,16 @@
 const bidForm = document.querySelector('#bidForm');
 
 //fetch call for placing a bid
-const prodId = document.querySelector('#idEl').getAttribute('value')
-const userId = document.querySelector('#userIdEl').textContent;
+
 const placeBid = async (event) => {
     event.preventDefault();
+    const prodId = document.querySelector('#idEl').getAttribute('value')
+    const userId = document.querySelector('#userIdEl').textContent;
+    
     const bidAmt = document.querySelector('#new-bid').value;
-    const response = await fetch(`/products/view/${product.id}`, {
+    const response = await fetch(`/product/view/${prodId}`, {
         method: 'POST',
-        body: JSON.stringify({ bidAmt, userId, prodId })
+        body: JSON.stringify({ bidAmt, userId, parseInt(prodId) })
     })
 }
 
