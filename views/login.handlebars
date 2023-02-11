@@ -1,12 +1,52 @@
-<form class="form"> 
-    <input id="username" type="text" placeholder="username">
-    <input id="password" type="text" placeholder="password">
+<div class="flex flex-row">
+<form class="form m-2 login" id="create-form"> 
+    <div class="flex flex-col">
+    <h3>Create account</h3>
+    <input id="email" type="text" placeholder="email">
+    <input id="create-username" type="text" placeholder="username">
+    <input id="create-password" type="text" placeholder="password">
     <button type="submit">Submit</button>
+    </div>
 </form>
+<form class="form m-2 login" id="login-form"> 
+    <div class="flex flex-col">
+    <h3>Existing Users Login</h3>
+    <input id="login-username" type="text" placeholder="username">
+    <input id="login-password" type="text" placeholder="password">
+    <button type="submit">Submit</button>
+    </div>
+</form>
+</div>
 
 <script>
-    const form = document.querySelector(".form")
-    form.addEventListener("submit", (e) => {
+    const createForm = document.querySelector("#create-form");
+    const loginForm = document.querySelector("#login-form");
+
+    //Create user function
+    createForm.addEventListener("submit", (e) => {
+        const username = document.querySelector('#username').value.trim()
+        const password = document.querySelector('#password').value.trim()
+        e.preventDefault()
+        const creds = {
+            user_name: username,
+            password: password
+        }
+        console.log(creds)
+        fetch("/user/login", {
+        method: 'POST',
+        body: JSON.stringify(creds),
+        headers: { 'Content-Type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+      document.location.replace('/');
+    } else {
+     console.log(response.statusText);
+    }
+    })
+    });
+
+    //Existing User Login function
+    loginForm.addEventListener("submit", (e) => {
         const username = document.querySelector('#username').value.trim()
         const password = document.querySelector('#password').value.trim()
         e.preventDefault()
