@@ -1,1 +1,31 @@
-<div>hello</div>
+<form class="form"> 
+    <input id="username" type="text" placeholder="username">
+    <input id="password" type="text" placeholder="password">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const form = document.querySelector(".form")
+    form.addEventListener("submit", (e) => {
+        const username = document.querySelector('#username').value.trim()
+        const password = document.querySelector('#password').value.trim()
+        e.preventDefault()
+        const creds = {
+            user_name: username,
+            password: password
+        }
+        console.log(creds)
+        fetch("/user/login", {
+        method: 'POST',
+        body: JSON.stringify(creds),
+        headers: { 'Content-Type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+      document.location.replace('/');
+    } else {
+     console.log(response.statusText);
+    }
+    })
+    })
+    
+</script>

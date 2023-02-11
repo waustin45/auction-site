@@ -9,11 +9,35 @@
     <title>Auction Site</title>
 </head>
 <body>
+    <nav class="w-full h-[5rem] flex justify-around items-center">
+        <a href="/" class="text-4xl">Auction Site</a>
+        {{#if logged_in}}
+        <div>
+        <button class="text-lg border-2 p-2 bg-blue-200" id="logout-btn">logout</button>
+        <a class="text-lg border-2 p-2 bg-blue-200" href="/product/newproduct">List an Item</a>
+        </div>
+        {{else}}
+        <a class="text-lg border-2 p-2 bg-blue-200" href="/user">login</a>
+        {{/if}}
+    </nav>
     {{{body}}}
 
 
 
 
-   
+   <script>
+    document.querySelector('#logout-btn').addEventListener("click", () => {
+        fetch("/user/logout", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            }).then(res => {
+        if (res.ok) {
+            location.replace('/');
+        } else (
+            console.log(res.statusText)
+        )
+    })
+    })
+   </script>
 </body>
 </html>
