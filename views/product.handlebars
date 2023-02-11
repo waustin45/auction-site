@@ -1,11 +1,11 @@
 <main class="flex flex-row">
     <img src={{product.image}} alt="product image goes here">
     <div>
-    <h1>{{product.product_name}}</h1>
-    <p>selling by: {{product.user_id}}</p> <!--Should be username? -->
+    <h1>{{product.product_name}}</h1> <span id="idEl" value={{product.id}}></span>
+    <p>selling by: <span id='userIdEl'>{{product.user_id}}</span></p> <!--Should be username? -->
     <p>{{product.description}}</p>
     <p>Current bid: </p>
-    <form> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid" value={{product.id}}> <input type="submit" value="Submit"> </form>
+    <form id="bidForm"> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid" value={{product.id}}> <input type="submit" value="Submit"> </form>
     <p> Bidding history:</p>
 
 
@@ -15,22 +15,20 @@
 </main>
 
 <script>
-const bidBtn = document.querySelector('#new-bid');
+const bidForm = document.querySelector('#bidForm');
 
 //fetch call for placing a bid
-    console.log(product.id);
+const prodId = document.querySelector('#idEl').getAttribute('value')
+const userId = document.querySelector('#userIdEl').textContent;
 const placeBid = async (event) => {
     event.preventDefault();
-    console.log(product.id);
-    console.log(event);
-    {{!-- const bidAmt = document.querySelector('#new-bid').value;
+    const bidAmt = document.querySelector('#new-bid').value;
     const response = await fetch(`/products/view/${product.id}`, {
         method: 'POST',
-        body: JSON.stringify({ bidAmt, 'userid', product.id})
-
-    }) --}}
+        body: JSON.stringify({ bidAmt, userId, prodId })
+    })
 }
 
-bidBtn.addEventListener('submit', placeBid);
+bidForm.addEventListener('submit', placeBid);
 
 </script>

@@ -15,7 +15,7 @@ router.get('/view/:id', async (req, res) => {
                     //     model: User,
                     //     attributes: [
                     //         'id',
-                    //         'username',
+                    //         'user_name',
                     //     ],
                     //     model: Bid,
                     //     attributes: [
