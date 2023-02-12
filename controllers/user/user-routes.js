@@ -27,7 +27,14 @@ router.post('/createuser', async (req, res) => {
     // }
     );
     console.log(newUser);
-    res.json(newUser);
+    req.session.save(() => {
+      req.session.user_id = newUser.user_name;
+      req.session.logged_in = true;
+      
+      res.json({ user: newUser.user_name, message: 'You are now logged in!' });
+      
+    });
+    // res.json(newUser);
   }catch(err) {
     res.status(500).json(err)
   }
