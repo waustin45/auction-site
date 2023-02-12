@@ -14,9 +14,10 @@ router.get('/view/:id', async (req, res) => {
                     {
                         model: Bid,
                         attributes: [
-                            'bid_amt',
+                            'bid_amt'
                         ],
-                        order: ['bid_amt', 'DESC']
+                        separate: true,
+                        order: [['bid_amt', 'DESC']]
 
                     },
                     {

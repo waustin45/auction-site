@@ -4,13 +4,17 @@
     <h1>{{product.product_name}}</h1> <span id="idEl" value={{product.id}}></span>
     <p>selling by: <span id='userIdEl' value={{product.user_id}} >{{product.user.user_name}}</span></p> <!--Should be username? -->
     <p>{{product.description}}</p>
-    <p>Current bid: </p>
+    <p>Current bid: <span id="high-bid">{{product.bids.[0].bid_amt}}</span> </p>
     <form id="bidForm"> 
         <label for="new-bid"> Place bid:</label> 
         <input type="text" id="new-bid" name="new-bid"> 
         <input type="submit" value="Submit"> 
     </form>
+    <div class="hidden" id="modal">Bid must be higher than previous</div>
     <p> Bidding history:</p>
+    {{#each product.bids as |bid|}}
+    <p>{{bid.bid_amt}}</p>
+    {{/each}}
 
 
 
@@ -25,16 +29,26 @@ const bidForm = document.querySelector('#bidForm');
 
 const placeBid = async (event) => {
     event.preventDefault();
+    const modalDiv = document.querySelector('#modal')
     const product_id = document.querySelector('#idEl').getAttribute('value');
     const user_id = document.querySelector('#userIdEl').getAttribute('value');
     const bid_amt = document.querySelector('#new-bid').value;
-    console.log(product_id,user_id,bid_amt);
-    const response = await fetch(`/product/view/${product_id}`, {
-        method: 'POST',
-        body: JSON.stringify({ bid_amt, user_id, product_id }),
-        headers: { 'Content-Type': 'application/json' },
-    })
+    const prevHighBid = document.querySelector('#high-bid').textContent;
+    console.log(product_id,user_id,bid_amt,prevHighBid);
+    if (bid_amt > prevHighBid) {
+        console.log('accepted')
+        const response = await fetch(`/product/view/${product_id}`, {
+            method: 'POST',
+            body: JSON.stringify({ bid_amt, user_id, product_id }),
+            headers: { 'Content-Type': 'application/json' },
+            })
+        location.reload();
+} else {
+    modalDiv.classList.remove('hidden');
+    console.log('Bid must be greater than the previous high bid')
 }
+}
+    
 
 bidForm.addEventListener('submit', placeBid);
 
