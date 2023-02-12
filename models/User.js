@@ -27,12 +27,6 @@ class User extends Model {
           isEmail: true,
         },
       },
-      address: {
-        type: DataTypes.STRING,
-      },
-      real_name: {
-        type: DataTypes.STRING,
-      },
       password: {
         type: DataTypes.STRING,
         allowNull: false,

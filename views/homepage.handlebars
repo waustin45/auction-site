@@ -1,23 +1,23 @@
-<main class="home-page-main">
-    <section class="interactive-menu border-2 h-[20rem] w-[10rem] ">
-        <button class="sort-by-asc bg-blue-300 p-1"><span>Sort by asc. price</span></button>
-        <button class="sort-by-desc bg-blue-300 p-1"><span>Sort by desc. price</span></button>
-        <button class="sort-by-bids bg-blue-300 p-1"><span>Sort by number of bids.</span></button>
+<main class="home-page-main w-full">
+    <section class="interactive-menu border-2 h-[20rem] w-[10rem] flex flex-col justify-start items-center gap-2 fixed">
+        <button class="sort-by-asc  text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 mt-1"><span>Sort by asc. price</span></button>
+        <button class="sort-by-desc text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by desc. price</span></button>
+        <button class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by number of bids.</span></button>
     </section>
-    <section class="products-output">
+    <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
         {{#each plainData as |data|}}
-        <div class="card-wrapper border-2 w-[15rem] flex flex-col gap-3">
+        <div class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
             <img src={{data.image}} alt="product-img">
             <div class="product-name">
-                <span>{{data.product_name}}</span>
+                <span>Product Name: {{data.product_name}}</span>
             </div>
             <div class="user-name">
-                <span>{{data.user.user_name}}</span>
+                <span>User Name: {{data.user.user_name}}</span>
             </div>
             <div class="bids">
-                <span>{{data.bids.[0].bid_amt}}</span>
+                <span> Highest Bid:{{data.bids.[0].bid_amt}}</span>
             </div>
-            <a class="bg-blue-300 p-1" href="/product/view/{{data.id}}">View Product</a>
+            <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/{{data.id}}">View Product</a>
         </div>
         
         {{/each}}

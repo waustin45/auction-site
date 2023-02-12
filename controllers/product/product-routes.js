@@ -12,25 +12,24 @@ router.get('/view/:id', async (req, res) => {
             const dbProductData = await Product.findByPk(req.params.id, {
                 include: [
                     {
-                       
                         model: Bid,
                         attributes: [
-                            
                             'bid_amt',
                         ],
-                        
+                        order: ['bid_amt', 'DESC']
+
                     },
                     {
                         model: User,
                         attributes: [
+                            'id',
                             'user_name',
-                            'id'
-                        ], 
+                        ],
                     }
                 ],
             });
             const product = dbProductData.get({ plain: true });
-            console.log(product)
+            console.log(product);
             res.render('product', { product, logged_in: req.session.logged_in, session_user: req.session.user_id })
         }
         catch (err) {
