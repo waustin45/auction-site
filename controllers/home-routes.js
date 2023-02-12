@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
           {
             model: Bid,
             attributes: ['bid_amt'],
-            order: ['bid_amt', 'ASC']
+            order: ['bid_amt', 'DSC']
             
           }
         ],
