@@ -7,7 +7,7 @@
     <section class="products-output">
         {{#each plainData as |data|}}
         <div class="card-wrapper border-2 w-[15rem] flex flex-col gap-3">
-            <img src="{#}" alt="product-img">
+            <img src={{data.image}} alt="product-img">
             <div class="product-name">
                 <span>{{data.product_name}}</span>
             </div>

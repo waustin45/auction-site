@@ -18,16 +18,17 @@
 const bidForm = document.querySelector('#bidForm');
 
 //fetch call for placing a bid
-const prodId = document.querySelector('#idEl').getAttribute('value')
-const userId = document.querySelector('#userIdEl').textContent;
+
 const placeBid = async (event) => {
     event.preventDefault();
-    const prodId = document.querySelector('#idEl').getAttribute('value');
-    const userId = document.querySelector('#userIdEl').textContent;
-    const bidAmt = document.querySelector('#new-bid').value;
-    const response = await fetch(`/products/view/${prodId}`, {
+    const product_id = document.querySelector('#idEl').getAttribute('value');
+    const user_id = document.querySelector('#userIdEl').textContent;
+    const bid_amt = document.querySelector('#new-bid').value;
+    console.log(product_id,user_id,bid_amt);
+    const response = await fetch(`/product/view/${product_id}`, {
         method: 'POST',
-        body: JSON.stringify({ bidAmt, userId, parseInt(prodId) })
+        body: JSON.stringify({ bid_amt, user_id, product_id }),
+        headers: { 'Content-Type': 'application/json' },
     })
 }
 
