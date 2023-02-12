@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
           {
             model: Bid,
             attributes: ['bid_amt'],
-            order: ['bid_amt', 'ASC']
+            order: ['bid_amt', 'DSC']
             
           }
         ],
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       })
      const plainData = data.map((info) => info.get({ plain: true }));
      console.log(plainData);
-     console.log(plainData[0].bids[0],plainData[0].bids[1],plainData[0].bids[5],plainData[0].bids[4]);
+     console.log(plainData[0].bids[0],plainData[0].bids[1],plainData[0].bids[2],plainData[0].bids[3]);
      
      res.render('homepage', { plainData, logged_in: req.session.logged_in, session_user: req.session.user_id  });
     } catch (err) {
