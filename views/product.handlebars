@@ -12,9 +12,22 @@
     </form>
     <div class="hidden" id="modal">Bid must be higher than previous</div>
     <p> Bidding history:</p>
+    <table class="table-auto">
+        <thead>
+            <th>Bid amount</th> 
+            <th>User</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
     {{#each product.bids as |bid|}}
-    <p>{{bid.bid_amt}}</p>
+        <tr>
+            <td>{{bid.bid_amt}}</td>
+            <td>{{bid.user_id}}</td>
+            <td>{{bid.created_at}}</td>
+        </tr>
     {{/each}}
+    </tbody>
+    </table>
 
 
 
