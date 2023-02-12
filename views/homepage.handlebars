@@ -1,5 +1,6 @@
-<main class="home-page-main w-full">
-    <section class="interactive-menu border-2 h-[20rem] w-[10rem] flex flex-col justify-start items-center gap-2 fixed">
+<main class="home-page-main w-full h-full flex gap-2">
+    <section class="interactive-menu border-2 h-[20rem] w-[10rem] flex flex-col justify-start items-center gap-2 bg-[#588B8B]/60">
+    <h1 class="font-bold text-white mt-1">Filters</h1>
         <button class="sort-by-asc  text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 mt-1"><span>Sort by asc. price</span></button>
         <button class="sort-by-desc text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by desc. price</span></button>
         <button class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by number of bids.</span></button>
@@ -7,15 +8,19 @@
     <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
         {{#each plainData as |data|}}
         <div class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
-            <img src={{data.image}} alt="product-img">
+            <img class="w-full h-[200px]" src={{data.image}} alt="product-img">
             <div class="product-name">
-                <span>Product Name: {{data.product_name}}</span>
+                <span>Product Name: <span class="font-bold">{{data.product_name}}</span></span>
             </div>
             <div class="user-name">
-                <span>User Name: {{data.user.user_name}}</span>
+                <span>User Name: <span class="font-bold">{{data.user.user_name}}</span></span>
             </div>
             <div class="bids">
-                <span> Highest Bid:{{data.bids.[0].bid_amt}}</span>
+                {{#if data.bids.[0].bid_amt}}
+                <span> Highest Bid: <span class="font-bold">${{data.bids.[0].bid_amt}}</span></span>
+                {{else}}
+                <span> Highest Bid: <span class="font-bold">No Bids</span></span>
+                {{/if}}
             </div>
             <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/{{data.id}}">View Product</a>
         </div>
