@@ -1,11 +1,15 @@
 <main class="flex flex-row">
-    <img src={{product.image}} alt="product image goes here">
+    <img class="w-[300px]" src={{product.image}} alt="product image goes here">
     <div>
     <h1>{{product.product_name}}</h1> <span id="idEl" value={{product.id}}></span>
     <p>selling by: <span id='userIdEl' value={{product.user_id}} >{{product.user.user_name}}</span></p> <!--Should be username? -->
     <p>{{product.description}}</p>
     <p>Current bid: </p>
-    <form id="bidForm"> <label for="new-bid"> Place bid:</label> <input type="text" id="new-bid" name="new-bid"> <input type="submit" value="Submit"> </form>
+    <form id="bidForm"> 
+        <label for="new-bid"> Place bid:</label> 
+        <input type="text" id="new-bid" name="new-bid"> 
+        <input type="submit" value="Submit"> 
+    </form>
     <p> Bidding history:</p>
 
 

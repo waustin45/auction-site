@@ -10,15 +10,15 @@
     <title>Auction Site</title>
 </head>
 <body>
-    <nav class="w-full h-[5rem] flex justify-around items-center">
-        <a href="/" class="text-4xl">Auction Site</a>
+    <nav class="w-full h-[5rem] flex justify-around items-center bg-[#588B8B]/70">
+        <a href="/" class="text-4xl text-white">Auction Site</a>
         {{#if logged_in}}
         <div>
-        <button class="text-lg border-2 p-2 bg-blue-200" id="logout-btn">logout</button>
-        <a class="text-lg border-2 p-2 bg-blue-200" href="/product/newproduct">List an Item</a>
+        <a class="text-lg border-2 p-2 bg-[#EEEEEE]/60 hover:bg-[#EEEEEE]/25 cursor-pointer" id="logout-btn">logout</a>
+        <a class="text-lg border-2 p-2 bg-[#EEEEEE]/60 hover:bg-[#EEEEEE]/25" href="/product/newproduct">List an Item</a>
         </div>
         {{else}}
-        <a class="text-lg border-2 p-2 bg-blue-200" href="/user">login</a>
+        <a class="text-lg border-2 p-2 bg-[#EEEEEE]/60 hover:bg-[#EEEEEE]/25" href="/user">login</a>
         {{/if}}
     </nav>
     {{{body}}}

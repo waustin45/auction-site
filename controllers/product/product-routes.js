@@ -30,8 +30,6 @@ router.get('/view/:id', async (req, res) => {
             });
             const product = dbProductData.get({ plain: true });
             console.log(product);
-            console.log(product.bids[0].bid_amt, product.bids[1].bid_amt);
-            const bidsOrdered = 
             res.render('product', { product, logged_in: req.session.logged_in, session_user: req.session.user_id })
         }
         catch (err) {
