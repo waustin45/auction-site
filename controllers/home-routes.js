@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
             attributes: ['bid_amt'],
             separate: true,
             order: [['bid_amt', 'DESC']],
+
             
           }
         ],
@@ -21,8 +22,6 @@ router.get('/', async (req, res) => {
       })
      const plainData = data.map((info) => info.get({ plain: true }));
      console.log(plainData);
-     
-     
      res.render('homepage', { plainData, logged_in: req.session.logged_in, session_user: req.session.user_id  });
     } catch (err) {
         res.status(500).json(err)
