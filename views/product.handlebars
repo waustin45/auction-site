@@ -1,20 +1,34 @@
-<main class="flex flex-row">
-    <img class="w-[300px]" src={{product.image}} alt="product image goes here">
-    <div>
-    <h1>{{product.product_name}}</h1> <span id="idEl" value={{product.id}}></span>
-    <p>selling by: <span id='userIdEl' value={{product.user_id}} >{{product.user.user_name}}</span></p> <!--Should be username? -->
+<main class="sm:flex sm:flex-row">
+    <div class="sm:w-1/3 m-10"><img class="sm:object-contain" src={{product.image}} alt="product image goes here"></div>
+    <div class="my-10 mx-2">
+    <h1 class="text-2xl font-medium">{{product.product_name}}</h1> <span id="idEl" value={{product.id}}></span>
+    <p class="text-sm">selling by: <span id='userIdEl' value={{product.user_id}} >{{product.user.user_name}}</span></p>
     <p>{{product.description}}</p>
     <p>Current bid: <span id="high-bid">{{product.bids.[0].bid_amt}}</span> </p>
     <form id="bidForm"> 
         <label for="new-bid"> Place bid:</label> 
-        <input type="text" id="new-bid" name="new-bid"> 
-        <input type="submit" value="Submit"> 
+        <input type="text" id="new-bid" name="new-bid" class="rounded border-2"> 
+        <button form="bidForm" type="submit" class="bg-slate-300 px-3 rounded border-2 border-slate-300">Submit</button>
+        {{!-- <input type="submit" value="Submit">  --}}
     </form>
     <div class="hidden" id="modal">Bid must be higher than previous</div>
     <p> Bidding history:</p>
+    <table class="table-auto">
+        <thead>
+            <th>Bid amount</th> 
+            <th>User</th>
+            <th>Date</th>
+        </thead>
+        <tbody>
     {{#each product.bids as |bid|}}
-    <p>{{bid.bid_amt}}</p>
+        <tr>
+            <td>{{bid.bid_amt}}</td>
+            <td>{{bid.user_id}}</td>
+            <td>{{bid.created_at}}</td>
+        </tr>
     {{/each}}
+    </tbody>
+    </table>
 
 
 
