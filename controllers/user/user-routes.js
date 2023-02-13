@@ -27,13 +27,14 @@ router.post('/createuser', async (req, res) => {
     // }
     );
     console.log(newUser);
-    req.session.save(() => {
+    
       req.session.user_id = newUser.user_name;
+      req.session.table_id = newUser.id
       req.session.logged_in = true;
-      
+      console.log(req.session.user_id, req.session.table_id)
       res.json({ user: newUser.user_name, message: 'You are now logged in!' });
       
-    });
+    
     // res.json(newUser);
   }catch(err) {
     res.status(500).json(err)
@@ -58,13 +59,14 @@ router.post('/login', async (req, res) => {
     // const validPassword = await bcrypt.compare(req.body.password, userData.password);
     // console.log(userData.password)
    if(req.body.password == userData.password) {
-    req.session.save(() => {
+    
       req.session.user_id = userData.user_name;
+      req.session.table_id = userData.id
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
       
-    });
+    
     }else if (!validPassword) {
       res
         .status(400)

@@ -12,6 +12,7 @@
         {{!-- <input type="submit" value="Submit">  --}}
     </form>
     <div class="hidden" id="modal">Bid must be higher than previous</div>
+    <div class="hidden" id="secret-id">{{session_id}}</div>
     <p> Bidding history:</p>
     <table class="table-auto">
         <thead>
@@ -38,7 +39,6 @@
 
 <script>
 const bidForm = document.querySelector('#bidForm');
-
 //fetch call for placing a bid
 
 const placeBid = async (event) => {
@@ -46,6 +46,7 @@ const placeBid = async (event) => {
     const modalDiv = document.querySelector('#modal')
     const product_id = document.querySelector('#idEl').getAttribute('value');
     const user_id = document.querySelector('#userIdEl').getAttribute('value');
+    {{!-- const secret_id = document.querySelector('#secret-id').textContent --}}
     const bid_amt = document.querySelector('#new-bid').value;
     const prevHighBid = document.querySelector('#high-bid').textContent;
     console.log(product_id,user_id,bid_amt,prevHighBid);
@@ -53,7 +54,7 @@ const placeBid = async (event) => {
         console.log('accepted')
         const response = await fetch(`/product/view/${product_id}`, {
             method: 'POST',
-            body: JSON.stringify({ bid_amt, user_id, product_id }),
+            body: JSON.stringify({ bid_amt, product_id }),
             headers: { 'Content-Type': 'application/json' },
             })
         location.reload();

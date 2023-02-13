@@ -1,9 +1,11 @@
 <main class="home-page-main w-full h-full flex gap-2">
-    <section class="interactive-menu border-2 h-[20rem] w-[10rem] flex flex-col justify-start items-center gap-2 bg-[#588B8B]/60">
+    <section class="interactive-menu border-2 p-3 w-[10rem] flex flex-col justify-start items-center gap-2 bg-[#588B8B]/60">
     <h1 class="font-bold text-white mt-1">Filters</h1>
         <button class="sort-by-asc  text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 mt-1"><span>Sort by asc. price</span></button>
         <button class="sort-by-desc text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by desc. price</span></button>
-        <button class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by number of bids.</span></button>
+        <button id="sort-bid-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/asc"> Sort by alphabetical ASC.</a></span></button>
+        <button id="sort-bid-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/dsc"> Sort by alphabetical DESC.</a></span></button>
+        <button id="no-filter" class="no-filter-btn text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/">No Filter</a></span></button>
     </section>
     <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
         {{#each plainData as |data|}}
@@ -30,10 +32,15 @@
 </main>
 
 <script>
-           const btn = document.querySelector('.sort-by-asc')
-           btn.addEventListener('click', () => {
+           {{!-- const btn = document.querySelector('#sort-bid-btn')
+           btn.addEventListener('click', () => { 
             console.log("works")
-            fetch('/asc').then(res => res.json()).then(data=> console.log(data))
+            location.replace('/sort/asc')
            })
-                   
-        </script>
+           const noFilter = document.querySelector('#no-filter')
+           btn.addEventListener('click', () => {
+           
+            location.replace('/')
+           }) --}}
+           
+</script>

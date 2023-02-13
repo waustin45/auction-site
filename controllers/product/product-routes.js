@@ -31,9 +31,12 @@ router.get('/view/:id', async (req, res) => {
                     }
                 ],
             });
+           
             const product = dbProductData.get({ plain: true });
+            
             console.log(product);
-            res.render('product', { product, logged_in: req.session.logged_in, session_user: req.session.user_id })
+            
+            res.render('product', { product, logged_in: req.session.logged_in, session_user: req.session.user_id, session_id: req.session.table_id })
         }
         catch (err) {
             console.log(err);
@@ -49,7 +52,7 @@ router.post('/view/:id', async (req, res) => {
     try {
         const newBid = await Bid.create({
             bid_amt: req.body.bid_amt,
-            user_id: req.body.user_id,
+            user_id: req.session.table_id,
             product_id: req.body.product_id,
         });
         //Then what?  update page?
