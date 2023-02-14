@@ -55,33 +55,33 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    // Verify the posted password with the password store in the database
-    // const validPassword = await bcrypt.compare(req.body.password, userData.password);
-    // console.log(userData.password)
-   if(req.body.password == userData.password) {
+     //Verify the posted password with the password store in the database
+     const validPassword = await bcrypt.compare(req.body.password, userData.password);
+     console.log(userData.password)
+  //  if(req.body.password == userData.password) {
     
-      req.session.user_id = userData.user_name;
-      req.session.table_id = userData.id
+  //     req.session.user_id = userData.user_name;
+  //     req.session.table_id = userData.id
+  //     req.session.logged_in = true;
+      
+  //     res.json({ user: userData, message: 'You are now logged in!' });
+      
+    
+  //   }else if (!validPassword) {
+  //     res
+  //       .status(400)
+  //       .json({ message: 'Incorrect email or password, please try again' });
+  //     return;
+  //   }
+
+     //Create session variables based on the logged in user
+     req.session.save(() => {
+      req.session.user_id = userData.id;
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
       
-    
-    }else if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    // Create session variables based on the logged in user
-    // req.session.save(() => {
-    //   req.session.user_id = userData.id;
-    //   req.session.logged_in = true;
-      
-    //   res.json({ user: userData, message: 'You are now logged in!' });
-      
-    // });
+    });
 
   } catch (err) {
     res.status(700).json(err);
