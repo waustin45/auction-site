@@ -11,7 +11,16 @@
         <button form="bidForm" type="submit" class="bg-slate-300 px-3 rounded border-2 border-slate-300">Submit</button>
         {{!-- <input type="submit" value="Submit">  --}}
     </form>
-    <div class="hidden" id="modal">Bid must be higher than previous</div>
+    <div class="h-20 my-1"> {{!-- container for alert box --}}
+    <div class="alert alert-warning shadow-lg hidden">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>Your bid must be greater than the previous bid.</span> <button class="btn btn-square btn-outline" id="closeAlertBtn">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+</button>
+        </div>
+        </div>
+</div>
     <div class="hidden" id="secret-id">{{session_id}}</div>
     <p> Bidding history:</p>
     <table class="table-auto">
@@ -39,11 +48,12 @@
 
 <script>
 const bidForm = document.querySelector('#bidForm');
-//fetch call for placing a bid
+const closeAlertBtn = document.querySelector('#closeAlertBtn');
+const alertDiv = document.querySelector('.alert')
 
+//fetch call for placing a bid
 const placeBid = async (event) => {
     event.preventDefault();
-    const modalDiv = document.querySelector('#modal')
     const product_id = document.querySelector('#idEl').getAttribute('value');
     const user_id = document.querySelector('#userIdEl').getAttribute('value');
     {{!-- const secret_id = document.querySelector('#secret-id').textContent --}}
@@ -59,12 +69,18 @@ const placeBid = async (event) => {
             })
         location.reload();
 } else {
-    modalDiv.classList.remove('hidden');
-    console.log('Bid must be greater than the previous high bid')
+    alertDiv.classList.remove('hidden');
+    console.log('Bid must be greater than the previous high bid');
+    {{!-- setTimeout(() => {
+        if (!alertDiv.contains('hidden')){
+            alertDiv.classList.add('hidden');}
+    }
+    , 1000); --}}
 }
 }
     
 
 bidForm.addEventListener('submit', placeBid);
+closeAlertBtn.addEventListener('click', () => {alertDiv.classList.add('hidden')})
 
 </script>
