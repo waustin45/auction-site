@@ -38,10 +38,10 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2">
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sort by asc. price</a>
+                     <button id="sort-bid-btn" href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sort by asc. price</button>
                   </li>
                   <li>
-                     <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sort by desc. price</a>
+                     <button href="#" class="sort-by-desc flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sort by desc. price</button>
                   </li>
                   <li>
                      <a href="/sort/alphabetical/asc" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sort by alphabetical ASC.</a>
@@ -57,30 +57,31 @@
                <span class="flex-1 ml-3 whitespace-nowrap">No Filter</span>
             </a>
          </li>
-        
+        </ul>
+    </div>
+</div>
+        <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
+            {{#each plainData as |data|}}
+            <div class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
+                <img class="w-full h-[200px]" src={{data.image}} alt="product-img">
+                <div class="product-name">
+                    <span>Product Name: <span class="font-bold">{{data.product_name}}</span></span>
+                </div>
+                <div class="user-name">
+                    <span>User Name: <span class="font-bold">{{data.user.user_name}}</span></span>
+                </div>
+                <div class="bids">
+                    {{#if data.bids.[0].bid_amt}}
+                    <span> Highest Bid: <span class="font-bold">${{data.bids.[0].bid_amt}}</span></span>
+                    {{else}}
+                    <span> Highest Bid: <span class="font-bold">No Bids</span></span>
+                    {{/if}}
+                </div>
+                <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/{{data.id}}">View Product</a>
+            </div>
 
-    <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
-        {{#each plainData as |data|}}
-        <div class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
-            <img class="w-full h-[200px]" src={{data.image}} alt="product-img">
-            <div class="product-name">
-                <span>Product Name: <span class="font-bold">{{data.product_name}}</span></span>
-            </div>
-            <div class="user-name">
-                <span>User Name: <span class="font-bold">{{data.user.user_name}}</span></span>
-            </div>
-            <div class="bids">
-                {{#if data.bids.[0].bid_amt}}
-                <span> Highest Bid: <span class="font-bold">${{data.bids.[0].bid_amt}}</span></span>
-                {{else}}
-                <span> Highest Bid: <span class="font-bold">No Bids</span></span>
-                {{/if}}
-            </div>
-            <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/{{data.id}}">View Product</a>
-        </div>
-        
-        {{/each}}
-    </section>
+            {{/each}}
+        </section>
 </main>
 
 <script>
