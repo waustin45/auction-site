@@ -71,11 +71,11 @@ const placeBid = async (event) => {
 } else {
     alertDiv.classList.remove('hidden');
     console.log('Bid must be greater than the previous high bid');
-    {{!-- setTimeout(() => {
-        if (!alertDiv.contains('hidden')){
-            alertDiv.classList.add('hidden');}
+    setTimeout(() => {
+       
+            alertDiv.classList.add('hidden');
     }
-    , 1000); --}}
+    , 5000);
 }
 }
     

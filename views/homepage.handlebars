@@ -48,23 +48,26 @@
         </ul>
     </div>
 </div>
-        <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
+        <section class="products-output flex flex-wrap justify-center items-center gap-4 p-2 w-full">
             {{#each plainData as |data|}}
             <div class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
+                
                 <img class="w-full h-[200px]" src={{data.image}} alt="product-img">
-                <div class="product-name">
+              
+                <div class="product-name px-1">
                     <span>Product Name: <span class="font-bold">{{data.product_name}}</span></span>
                 </div>
-                <div class="user-name">
+                <div class="user-name px-1">
                     <span>User Name: <span class="font-bold">{{data.user.user_name}}</span></span>
                 </div>
-                <div class="bids">
+                <div class="bids px-1">
                     {{#if data.bids.[0].bid_amt}}
                     <span> Highest Bid: <span class="font-bold">${{data.bids.[0].bid_amt}}</span></span>
                     {{else}}
                     <span> Highest Bid: <span class="font-bold">No Bids</span></span>
                     {{/if}}
                 </div>
+                
                 <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/{{data.id}}">View Product</a>
             </div>
 
