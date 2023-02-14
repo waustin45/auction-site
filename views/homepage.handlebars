@@ -1,10 +1,10 @@
 <main class="home-page-main w-full h-full flex gap-2">
     <section class="interactive-menu border-2 p-3 w-[10rem] flex flex-col justify-start items-center gap-2 bg-[#588B8B]/60">
     <h1 class="font-bold text-white mt-1">Filters</h1>
-        <button class="sort-by-asc  text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 mt-1"><span>Sort by asc. price</span></button>
-        <button class="sort-by-desc text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by desc. price</span></button>
-        <button id="sort-bid-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/asc"> Sort by alphabetical ASC.</a></span></button>
-        <button id="sort-bid-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/dsc"> Sort by alphabetical DESC.</a></span></button>
+        <button class="sort-by-desc text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span>Sort by bid DESC</span></button>
+        <button id="sort-bid-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span> Sort by bid ASC</span></button>
+        <button id="sort-alph-asc-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/asc"> Sort by alphabetical ASC.</a></span></button>
+        <button id="sort-alph-dsc-btn" class="sort-by-bids text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/sort/alphabetical/dsc"> Sort by alphabetical DESC.</a></span></button>
         <button id="no-filter" class="no-filter-btn text-white w-[100px] bg-[#588B8B]/60 hover:bg-[#588B8B]/25  p-1"><span><a href="/">No Filter</a></span></button>
     </section>
     <section class="products-output flex flex-wrap justify-center items-center gap-4 w-full">
@@ -32,15 +32,91 @@
 </main>
 
 <script>
-           {{!-- const btn = document.querySelector('#sort-bid-btn')
+           const btn = document.querySelector('#sort-bid-btn')
+           const btnDESC = document.querySelector('.sort-by-desc')
+           const innerH = document.querySelector('.products-output')
            btn.addEventListener('click', () => { 
-            console.log("works")
-            location.replace('/sort/asc')
-           })
-           const noFilter = document.querySelector('#no-filter')
-           btn.addEventListener('click', () => {
+            fetch('/sort/bids/dsc')
+            .then(res => res.json())
+            .then(data=>{
+                console.log(data)
+                let testData = data.map(info => {
+                    let key = Math.floor(info.bids[0].bid_amt);
+                    console.log("from new test", key);
+                    return info;
+                }).sort((a, b) => {
+                    return a.bids[0].bid_amt-b.bids[0].bid_amt;
+                })
+                console.log(testData);
+                let map = testData.map((info, index) => {
+                    let key = Math.floor(info.bids[0].bid_amt)
+                    console.log(key)
+                    return  `<div key=${Math.floor(info.bids[0].bid_amt)} class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
+                    <img class="w-full h-[200px]" src=${info.image} alt="product-img">
+                    <div class="product-name">
+                        <span>Product Name: <span class="font-bold">${info.product_name}</span></span>
+                    </div>
+                    <div class="user-name">
+                        <span>User Name: <span class="font-bold">${info.user.user_name}</span></span>
+                    </div>
+                    <div class="bids">
+
+                        <span> Highest Bid: <span class="font-bold">$ ${info.bids[0].bid_amt}</span></span>
+
+                        
+
+                    </div>
+                        <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/${info.id}">View Product</a>
+                    </div>`
+                }).join(' ')
+                
            
-            location.replace('/')
-           }) --}}
+            innerH.innerHTML = map
+            })
+            
+           })
+          
+           btnDESC.addEventListener('click', () => { 
+            fetch('/sort/bids/dsc')
+            .then(res => res.json())
+            .then(data=>{
+                console.log(data)
+                let testData = data.map(info => {
+                    let key = Math.floor(info.bids[0].bid_amt);
+                    console.log("from new test", key);
+                    return info;
+                }).sort((a, b) => {
+                    return b.bids[0].bid_amt-a.bids[0].bid_amt;
+                })
+                console.log(testData);
+                let map = testData.map((info, index) => {
+                    let key = Math.floor(info.bids[0].bid_amt)
+                    console.log(key)
+                    return  `<div key=${Math.floor(info.bids[0].bid_amt)} class="card-wrapper shadow-lg border-2 w-[15rem] flex flex-col gap-3">
+                    <img class="w-full h-[200px]" src=${info.image} alt="product-img">
+                    <div class="product-name">
+                        <span>Product Name: <span class="font-bold">${info.product_name}</span></span>
+                    </div>
+                    <div class="user-name">
+                        <span>User Name: <span class="font-bold">${info.user.user_name}</span></span>
+                    </div>
+                    <div class="bids">
+
+                        <span> Highest Bid: <span class="font-bold">$ ${info.bids[0].bid_amt}</span></span>
+
+                        
+
+                    </div>
+                        <a class="bg-[#588B8B]/60 hover:bg-[#588B8B]/25 p-1 text-center text-white" href="/product/view/${info.id}">View Product</a>
+                    </div>`
+                }).join(' ')
+                
+            
+            innerH.innerHTML = map
+            })
+            
+           })
+
+
            
 </script>
