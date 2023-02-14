@@ -60,7 +60,14 @@ function createNewProduct (event) {
         headers: {
             'Content-Type': 'application/json',
           },
-    })
+    }).then(res => {
+        if (res.ok) {
+            console.log(res)
+                document.location.replace('/');
+      
+      }
+    }
+      )
     console.log(newProd)
     } else {
         alert("Failed to create product")
